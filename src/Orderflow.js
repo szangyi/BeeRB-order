@@ -52,7 +52,19 @@ const steps = [
     step: 3,
     title: "A bit of a patience",
     current: 2,
-    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post, orderNumber) => (
+    content: (
+      updateTotal,
+      total,
+      basket,
+      beers,
+      addToBasket,
+      next,
+      current,
+      handlemodal,
+      handlemodal2,
+      post,
+      orderNumber
+    ) => (
       <Step3
         updateTotal={updateTotal}
         total={total}
@@ -89,7 +101,7 @@ const steps = [
     step: 5,
     title: "Enjoy and repeat!",
     current: 4,
-    content: (updateTotal,total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post) => (
+    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post) => (
       <Step5
         updateTotal={updateTotal}
         total={total}
@@ -120,8 +132,9 @@ function Orderflow() {
       .then(setBeers);
   }, []);
 
-  function addToBasket(payload, amount = 1) {
+  function addToBasket(payload, amount = 0) {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
+    console.log(amount);
     if (inBasket === -1) {
       const nextPayload = { ...payload };
       nextPayload.amount = amount;
