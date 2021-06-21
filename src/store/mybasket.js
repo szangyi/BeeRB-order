@@ -3,10 +3,6 @@ import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 export default function MyBasket(props) {
-  //    let tot = amount * 75
-  //    return tot
-  //  }
-  // console.log(props.basket);
   return (
     <section className="MyBasket">
       <ul>
@@ -19,6 +15,8 @@ export default function MyBasket(props) {
             key={item.name}
             label={item.label}
             removeFromBasket={props.removeFromBasket}
+            addToBasket={props.addToBasket}
+            basket={props.basket}
           />
         ))}
       </ul>
@@ -34,18 +32,22 @@ function CartItem(props) {
   const [amount, setAmount] = useState(props.amount);
 
   function handleminus(itemName) {
-    console.log("decrease qty");
     if (amount > 0) {
+      //set local state
       setAmount(amount - 1);
+      //remove one piece of an item from the basket
+      props.addToBasket((props.basket.find(item=> item.name === props.name)), amount - 1)
     } else if (amount === 0) {
-      console.log("delete meeee");
+      //remove an item from the basket completely
       props.removeFromBasket(itemName);
     }
   }
 
-  function handleplus(evt) {
-    console.log("increase qty");
+  function handleplus() {
+    //set local state
     setAmount(amount + 1);
+    //add one piece of an item to the basket
+    props.addToBasket((props.basket.find(item=> item.name === props.name)), amount + 1)
   }
 
   // We derive the localtotal every render, based on the new amount variable

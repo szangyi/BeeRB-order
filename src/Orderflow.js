@@ -152,16 +152,24 @@ function Orderflow() {
       .then(setBeers);
   }, []);
 
+    //Call setTotal every time the content of the basket changes
+    useEffect(() => {
+      let itemsOrdered = 0;
+        basket.forEach((item) => {
+          itemsOrdered = itemsOrdered + item.amount
+          setTotal(itemsOrdered * 75);
+        })
+    }, [basket]);
+
   function addToBasket(payload, amount = 0) {
+    console.log("payload", payload)
     const inBasket = basket.findIndex((item) => item.name === payload.name);
-    console.log(amount);
     if (inBasket === -1) {
-      // add amount
       const nextPayload = { ...payload };
       nextPayload.amount = amount;
-      setBasket((prevState) => [...prevState, nextPayload]);
-      updateTotal();
-    } else {
+      setBasket(() => [...basket, nextPayload]);
+    }
+    else {
       const newBasket = basket.map((item) => {
         if (item.name === payload.name) {
           item.amount = amount;
@@ -169,7 +177,6 @@ function Orderflow() {
         return item;
       });
       setBasket(newBasket);
-      updateTotal();
     }
   }
 
