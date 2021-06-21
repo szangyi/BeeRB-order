@@ -33,7 +33,19 @@ const steps = [
     step: 2,
     title: "Place your order",
     current: 1,
-    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post) => (
+    content: (
+      updateTotal,
+      // removeFromBasket,
+      total,
+      basket,
+      beers,
+      addToBasket,
+      next,
+      current,
+      handlemodal,
+      handlemodal2,
+      post
+    ) => (
       <Step2
         updateTotal={updateTotal}
         total={total}
@@ -45,9 +57,11 @@ const steps = [
         handlemodal={handlemodal}
         handlemodal2={handlemodal2}
         post={post}
+        // removeFromBasket={removeFromBasket}
       />
     ),
   },
+
   {
     step: 3,
     title: "A bit of a patience",
@@ -136,6 +150,7 @@ function Orderflow() {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
     console.log(amount);
     if (inBasket === -1) {
+      // add amount
       const nextPayload = { ...payload };
       nextPayload.amount = amount;
       setBasket((prevState) => [...prevState, nextPayload]);
@@ -152,6 +167,17 @@ function Orderflow() {
     }
   }
 
+  function removeFromBasket(payload) {
+    console.log("remove from basket");
+    const newBasket = basket.map((item) => {
+      if (item.name !== payload.name) {
+        return item;
+      }
+      return false;
+    });
+    setBasket(newBasket);
+  }
+
   function updateTotal() {
     let itemsOrdered = 0;
     setTotal(
@@ -161,8 +187,9 @@ function Orderflow() {
       })
     );
     let newTotal = itemsOrdered * 75;
+    console.log(itemsOrdered);
     setTotal(newTotal);
-    // return newTotal
+    return newTotal;
   }
 
   function next() {
@@ -227,6 +254,7 @@ function Orderflow() {
               basket,
               beers,
               addToBasket,
+              // removeFromBasket,
               next,
               current,
               handlemodal,

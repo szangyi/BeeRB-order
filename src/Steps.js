@@ -46,6 +46,7 @@ function Step2(props) {
           beers={props.beers}
           basket={props.basket}
           addToBasket={props.addToBasket}
+          // removeFromBasket={props.removeFromBasket}
         />
         <Button className="button btn-yellow" type="primary" onClick={() => props.handlemodal()}>
           Place order

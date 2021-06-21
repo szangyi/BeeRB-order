@@ -31,34 +31,27 @@ export default function MyBasket(props) {
 
 function CartItem(props) {
   const [amount, setAmount] = useState(props.amount);
-  const [localtotal, setlocalTotal] = useState(amount * 75);
 
-  function getlocalTotal() {
-    let newTotal = 0;
-    newTotal = amount * 75;
-    setlocalTotal(newTotal);
-  }
   function handleminus(evt) {
     console.log("decrease qty");
-    getlocalTotal();
+    console.log(amount);
     if (amount > 0) {
-      setAmount((prevState) => {
-        return prevState - 1;
-      });
-      console.log(amount);
+      setAmount(amount - 1);
     } else if (amount === 0) {
       console.log("delete meeee");
+      // props.removeFromBasket();
     }
   }
 
   function handleplus(evt) {
-    console.log("increase qty");
-    setAmount((prevState) => {
-      return prevState + 1;
-    });
     console.log(amount);
-    getlocalTotal();
+    console.log("increase qty");
+    setAmount(amount + 1);
   }
+
+  // We derive the localtotal every render, based on the new amount variable
+  const localtotal = amount * 75;
+
   return (
     <li className="basket-display">
       <img className="image-basket" src={process.env.PUBLIC_URL + `/beers/${props.label}`} alt="beerlabel" />
