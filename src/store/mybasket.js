@@ -18,6 +18,7 @@ export default function MyBasket(props) {
             amount={item.amount}
             key={item.name}
             label={item.label}
+            removeFromBasket={props.removeFromBasket}
           />
         ))}
       </ul>
@@ -32,19 +33,17 @@ export default function MyBasket(props) {
 function CartItem(props) {
   const [amount, setAmount] = useState(props.amount);
 
-  function handleminus(evt) {
+  function handleminus(itemName) {
     console.log("decrease qty");
-    console.log(amount);
     if (amount > 0) {
       setAmount(amount - 1);
     } else if (amount === 0) {
       console.log("delete meeee");
-      // props.removeFromBasket();
+      props.removeFromBasket(itemName);
     }
   }
 
   function handleplus(evt) {
-    console.log(amount);
     console.log("increase qty");
     setAmount(amount + 1);
   }
@@ -58,9 +57,9 @@ function CartItem(props) {
       <p className="itemname-basket">{props.name}</p>
       <div className="beer-add">
         {" "}
-        <MinusCircleOutlined onClick={handleminus} />
+        <MinusCircleOutlined onClick={()=>handleminus(props.name)} />
         <p>{amount}</p>
-        <PlusCircleOutlined onClick={handleplus} />
+        <PlusCircleOutlined onClick={()=>handleplus()} />
       </div>
       <p className="localtotalprice-basket">{localtotal} kr</p>
     </li>

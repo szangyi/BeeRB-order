@@ -6,6 +6,7 @@ import { Header } from "./Header.js";
 import { Step1, Step2, Step3, Step4, Step5 } from "./Steps.js";
 import { Paymentform } from "./Paymentform.js";
 import { useState, useEffect } from "react";
+import { CompassOutlined } from "@ant-design/icons";
 
 const { Step } = Steps;
 
@@ -15,7 +16,7 @@ const steps = [
     title: "Select your beer",
 
     current: 0,
-    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2) => (
+    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, removeFromBasket}) => (
       <Step1
         updateTotal={updateTotal}
         total={total}
@@ -26,6 +27,7 @@ const steps = [
         current={current}
         handlemodal={handlemodal}
         handlemodal2={handlemodal2}
+        removeFromBasket={removeFromBasket}
       />
     ),
   },
@@ -34,8 +36,7 @@ const steps = [
     title: "Place your order",
     current: 1,
     content: (
-      updateTotal,
-      // removeFromBasket,
+      {updateTotal,
       total,
       basket,
       beers,
@@ -44,8 +45,9 @@ const steps = [
       current,
       handlemodal,
       handlemodal2,
-      post
-    ) => (
+      post,
+      removeFromBasket,
+      }) => (
       <Step2
         updateTotal={updateTotal}
         total={total}
@@ -57,7 +59,7 @@ const steps = [
         handlemodal={handlemodal}
         handlemodal2={handlemodal2}
         post={post}
-        // removeFromBasket={removeFromBasket}
+        removeFromBasket={removeFromBasket}
       />
     ),
   },
@@ -67,7 +69,7 @@ const steps = [
     title: "A bit of a patience",
     current: 2,
     content: (
-      updateTotal,
+      {updateTotal,
       total,
       basket,
       beers,
@@ -77,8 +79,9 @@ const steps = [
       handlemodal,
       handlemodal2,
       post,
-      orderNumber
-    ) => (
+      orderNumber,
+      removeFromBasket
+      }) => (
       <Step3
         updateTotal={updateTotal}
         total={total}
@@ -90,6 +93,7 @@ const steps = [
         handlemodal2={handlemodal2}
         post={post}
         orderNumber={orderNumber}
+        removeFromBasket={removeFromBasket}
       />
     ),
   },
@@ -97,7 +101,7 @@ const steps = [
     step: 4,
     title: "Pick up your order ",
     current: 3,
-    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post) => (
+    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post, removeFromBasket}) => (
       <Step4
         updateTotal={updateTotal}
         total={total}
@@ -108,6 +112,7 @@ const steps = [
         current={current}
         handlemodal2={handlemodal2}
         post={post}
+        removeFromBasket={removeFromBasket}
       />
     ),
   },
@@ -115,7 +120,7 @@ const steps = [
     step: 5,
     title: "Enjoy and repeat!",
     current: 4,
-    content: (updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post) => (
+    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post, removeFromBasket}) => (
       <Step5
         updateTotal={updateTotal}
         total={total}
@@ -126,6 +131,7 @@ const steps = [
         current={current}
         handlemodal2={handlemodal2}
         post={post}
+        removeFromBasket={removeFromBasket}
       />
     ),
   },
@@ -169,12 +175,7 @@ function Orderflow() {
 
   function removeFromBasket(payload) {
     console.log("remove from basket");
-    const newBasket = basket.map((item) => {
-      if (item.name !== payload.name) {
-        return item;
-      }
-      return false;
-    });
+    const newBasket = basket.filter(item => item.name !== payload);
     setBasket(newBasket);
   }
 
@@ -249,19 +250,19 @@ function Orderflow() {
           <div key={item.title} className={`steps-content ${item.step !== current + 1}`}>
             {" "}
             {item.content(
-              updateTotal,
+              {updateTotal,
               total,
               basket,
               beers,
               addToBasket,
-              // removeFromBasket,
               next,
               current,
               handlemodal,
               handlemodal2,
-              post
+              post,
+              removeFromBasket,
               // orderNumber
-            )}{" "}
+              })}{" "}
           </div>
         ))}
       </div>
