@@ -31,12 +31,20 @@ export default function MyBasket(props) {
 function CartItem(props) {
   const [amount, setAmount] = useState(props.amount);
 
+  function handleremove(itemName) {
+    props.removeFromBasket(itemName);
+  }
+
   function handleminus(itemName) {
+    console.log(amount);
     if (amount > 0) {
       //set local state
       setAmount(amount - 1);
       //remove one piece of an item from the basket
-      props.addToBasket((props.basket.find(item=> item.name === props.name)), amount - 1)
+      props.addToBasket(
+        props.basket.find((item) => item.name === props.name),
+        amount - 1
+      );
     } else if (amount === 0) {
       //remove an item from the basket completely
       props.removeFromBasket(itemName);
@@ -47,7 +55,10 @@ function CartItem(props) {
     //set local state
     setAmount(amount + 1);
     //add one piece of an item to the basket
-    props.addToBasket((props.basket.find(item=> item.name === props.name)), amount + 1)
+    props.addToBasket(
+      props.basket.find((item) => item.name === props.name),
+      amount + 1
+    );
   }
 
   // We derive the localtotal every render, based on the new amount variable
@@ -59,11 +70,14 @@ function CartItem(props) {
       <p className="itemname-basket">{props.name}</p>
       <div className="beer-add">
         {" "}
-        <MinusCircleOutlined onClick={()=>handleminus(props.name)} />
+        <MinusCircleOutlined onClick={() => handleminus(props.name)} />
         <p>{amount}</p>
-        <PlusCircleOutlined onClick={()=>handleplus()} />
+        <PlusCircleOutlined onClick={() => handleplus()} />
       </div>
       <p className="localtotalprice-basket">{localtotal} kr</p>
+      <div className="remove-item-icon" onClick={() => handleremove(props.name)}>
+        {" "}
+      </div>
     </li>
   );
 }

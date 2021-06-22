@@ -6,7 +6,7 @@ import { Header } from "./Header.js";
 import { Step1, Step2, Step3, Step4, Step5 } from "./Steps.js";
 import { Paymentform } from "./Paymentform.js";
 import { useState, useEffect } from "react";
-import { CompassOutlined } from "@ant-design/icons";
+// import { CompassOutlined } from "@ant-design/icons";
 
 const { Step } = Steps;
 
@@ -16,7 +16,18 @@ const steps = [
     title: "Select your beer",
 
     current: 0,
-    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, removeFromBasket}) => (
+    content: ({
+      updateTotal,
+      total,
+      basket,
+      beers,
+      addToBasket,
+      next,
+      current,
+      handlemodal,
+      handlemodal2,
+      removeFromBasket,
+    }) => (
       <Step1
         updateTotal={updateTotal}
         total={total}
@@ -35,8 +46,8 @@ const steps = [
     step: 2,
     title: "Place your order",
     current: 1,
-    content: (
-      {updateTotal,
+    content: ({
+      updateTotal,
       total,
       basket,
       beers,
@@ -47,7 +58,7 @@ const steps = [
       handlemodal2,
       post,
       removeFromBasket,
-      }) => (
+    }) => (
       <Step2
         updateTotal={updateTotal}
         total={total}
@@ -68,8 +79,8 @@ const steps = [
     step: 3,
     title: "A bit of a patience",
     current: 2,
-    content: (
-      {updateTotal,
+    content: ({
+      updateTotal,
       total,
       basket,
       beers,
@@ -80,8 +91,8 @@ const steps = [
       handlemodal2,
       post,
       orderNumber,
-      removeFromBasket
-      }) => (
+      removeFromBasket,
+    }) => (
       <Step3
         updateTotal={updateTotal}
         total={total}
@@ -101,7 +112,19 @@ const steps = [
     step: 4,
     title: "Pick up your order ",
     current: 3,
-    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post, removeFromBasket}) => (
+    content: ({
+      updateTotal,
+      total,
+      basket,
+      beers,
+      addToBasket,
+      next,
+      current,
+      handlemodal,
+      handlemodal2,
+      post,
+      removeFromBasket,
+    }) => (
       <Step4
         updateTotal={updateTotal}
         total={total}
@@ -120,7 +143,19 @@ const steps = [
     step: 5,
     title: "Enjoy and repeat!",
     current: 4,
-    content: ({updateTotal, total, basket, beers, addToBasket, next, current, handlemodal, handlemodal2, post, removeFromBasket}) => (
+    content: ({
+      updateTotal,
+      total,
+      basket,
+      beers,
+      addToBasket,
+      next,
+      current,
+      handlemodal,
+      handlemodal2,
+      post,
+      removeFromBasket,
+    }) => (
       <Step5
         updateTotal={updateTotal}
         total={total}
@@ -152,24 +187,23 @@ function Orderflow() {
       .then(setBeers);
   }, []);
 
-    //Call setTotal every time the content of the basket changes
-    useEffect(() => {
-      let itemsOrdered = 0;
-        basket.forEach((item) => {
-          itemsOrdered = itemsOrdered + item.amount
-          setTotal(itemsOrdered * 75);
-        })
-    }, [basket]);
+  //Call setTotal every time the content of the basket changes
+  useEffect(() => {
+    let itemsOrdered = 0;
+    basket.forEach((item) => {
+      itemsOrdered = itemsOrdered + item.amount;
+      setTotal(itemsOrdered * 75);
+    });
+  }, [basket]);
 
   function addToBasket(payload, amount = 0) {
-    console.log("payload", payload)
+    console.log("payload", payload);
     const inBasket = basket.findIndex((item) => item.name === payload.name);
     if (inBasket === -1) {
       const nextPayload = { ...payload };
       nextPayload.amount = amount;
       setBasket(() => [...basket, nextPayload]);
-    }
-    else {
+    } else {
       const newBasket = basket.map((item) => {
         if (item.name === payload.name) {
           item.amount = amount;
@@ -182,7 +216,7 @@ function Orderflow() {
 
   function removeFromBasket(payload) {
     console.log("remove from basket");
-    const newBasket = basket.filter(item => item.name !== payload);
+    const newBasket = basket.filter((item) => item.name !== payload);
     setBasket(newBasket);
   }
 
@@ -256,8 +290,8 @@ function Orderflow() {
         {steps.map((item) => (
           <div key={item.title} className={`steps-content ${item.step !== current + 1}`}>
             {" "}
-            {item.content(
-              {updateTotal,
+            {item.content({
+              updateTotal,
               total,
               basket,
               beers,
@@ -269,7 +303,7 @@ function Orderflow() {
               post,
               removeFromBasket,
               // orderNumber
-              })}{" "}
+            })}{" "}
           </div>
         ))}
       </div>

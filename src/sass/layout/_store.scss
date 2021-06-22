@@ -104,6 +104,8 @@
     .anticon-minus-circle,
     .anticon-plus-circle {
       svg {
+        width: 1.3em;
+        height: 1.3em;
         background: $pink;
         border-radius: 50%;
       }
@@ -216,7 +218,7 @@
 
 .basket-display {
   display: inline-grid;
-  grid-template-columns: 0.7fr 1.4fr 1fr 1fr;
+  grid-template-columns: 0.7fr 1.4fr 1fr 1fr 0.1fr;
   background-color: $light-grey;
   border-radius: 3px;
   padding: 5px 10px 5px 5px;
@@ -250,6 +252,10 @@
     .anticon-plus-circle {
       background: $pink;
       border-radius: 50%;
+      svg {
+        width: 1.3em;
+        height: 1.3em;
+      }
     }
     p {
       border: 2px solid $pink;
@@ -287,4 +293,28 @@
 // }
 .notactiveBeers {
   opacity: 20%;
+}
+
+.remove-item-icon {
+  cursor: pointer;
+  background-image: url(../../img/close.svg);
+  background-size: cover;
+  height: 1.3rem;
+  width: 1.3rem;
+  margin: 0 auto;
+  position: relative;
+  right: -1em;
+  top: -1em;
+}
+
+.inventory-container {
+  .beer-add {
+    .anticon-minus-circle,
+    .anticon-plus-circle {
+      svg {
+        width: 1.3em;
+        height: 1.3em;
+      }
+    }
+  }
 }
