@@ -104,9 +104,10 @@ function Step4(props) {
       {props.current > 2 && (
         <div>
           <p>
-            You can now pickup your order at the bar! <br></br>Just show your order ID.
+            You can now pickup your order at the bar!
+            {/* <br></br>Just show your order ID. */}
           </p>{" "}
-          <p className="queue-number-text">Order id: #</p>
+          {/* <p className="queue-number-text">Order id: #</p> */}
         </div>
       )}
     </div>

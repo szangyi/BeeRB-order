@@ -11,9 +11,10 @@ function Orderpickupmodal(props) {
     content: (
       <div className="orderpickup-modal">
         <p>
-          You can now pickup your order at the bar! <br></br>Just tell Jonas your order ID.
+          You can now pickup your order at the bar!
+          {/* <br></br>Just tell Jonas your order ID. */}
         </p>
-        <p className="queue-number-text"> Order id: #{/* {props.orderNumber} */}</p>
+        {/* <p className="queue-number-text"> Order id: #´{props.orderNumber} </p> */}
         <div className="cheers-svg-container">
           <div className="cheers-icon"></div>
         </div>
