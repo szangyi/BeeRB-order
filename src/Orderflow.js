@@ -12,7 +12,7 @@ const { Step } = Steps;
 
 const steps = [
   {
-    step: 1,
+    // step: 1,
     title: "Select your beer",
 
     current: 0,
@@ -43,7 +43,7 @@ const steps = [
     ),
   },
   {
-    step: 2,
+    // step: 2,
     title: "Place your order",
     current: 1,
     content: ({
@@ -76,7 +76,7 @@ const steps = [
   },
 
   {
-    step: 3,
+    // step: 3,
     title: "A bit of a patience",
     current: 2,
     content: ({
@@ -109,7 +109,7 @@ const steps = [
     ),
   },
   {
-    step: 4,
+    // step: 4,
     title: "Pick up your order ",
     current: 3,
     content: ({
@@ -140,7 +140,7 @@ const steps = [
     ),
   },
   {
-    step: 5,
+    // step: 5,
     title: "Enjoy and repeat!",
     current: 4,
     content: ({

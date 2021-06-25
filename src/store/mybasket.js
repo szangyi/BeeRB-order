@@ -37,7 +37,7 @@ function CartItem(props) {
 
   function handleminus(itemName) {
     console.log(amount);
-    if (amount > 0) {
+    if (amount > 1) {
       //set local state
       setAmount(amount - 1);
       //remove one piece of an item from the basket
@@ -45,7 +45,7 @@ function CartItem(props) {
         props.basket.find((item) => item.name === props.name),
         amount - 1
       );
-    } else if (amount === 0) {
+    } else if (amount === 1) {
       //remove an item from the basket completely
       props.removeFromBasket(itemName);
     }
