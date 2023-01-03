@@ -1,7 +1,9 @@
 import React from "react";
 import { Steps } from "antd";
 import "./App.scss";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+import "antd/dist/reset.css";
+
 import { Header } from "./Header.js";
 import { Step1, Step2, Step3, Step4, Step5 } from "./Steps.js";
 import { Paymentform } from "./Paymentform.js";

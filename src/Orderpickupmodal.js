@@ -1,7 +1,9 @@
 import React from "react";
 import { Modal } from "antd";
 import "./App.scss";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+import "antd/dist/reset.css";
+
 
 function Orderpickupmodal(props) {
   let secondsToGo = 5;

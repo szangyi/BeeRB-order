@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.scss";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+import "antd/dist/reset.css";
 import { Input, Button, Modal, Result } from "antd";
 import MaskedInput from "antd-mask-input";
 import ReactCardFlip from "react-card-flip";

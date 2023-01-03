@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
+import "antd/dist/reset.css";
 
 export class Header extends React.Component {
   render() {
